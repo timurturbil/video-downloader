@@ -13,7 +13,11 @@ BASE = {"noplaylist": True, "quiet": True, "no_warnings": True, "no_color": True
 _cf = os.environ.get("COOKIES_FILE")
 _cb = os.environ.get("COOKIES_BROWSER", "chrome")
 if _cf and os.path.exists(_cf):
-    BASE["cookiefile"] = _cf
+    # yt-dlp çerezleri cookiefile'a geri yazar; YouTube'un sildiği giriş çerezleri
+    # orijinal dosyayı bozmasın diye geçici bir kopya kullanılır
+    _tmp = tempfile.NamedTemporaryFile(suffix=".txt", delete=False).name
+    shutil.copyfile(_cf, _tmp)
+    BASE["cookiefile"] = _tmp
 elif _cb != "none":
     BASE["cookiesfrombrowser"] = (_cb,)
 

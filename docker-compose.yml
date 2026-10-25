@@ -4,5 +4,5 @@ services:
     ports:
       - "5050:5050"
     volumes:
-      - ./cookies:/cookies
+      - ./cookies:/cookies:ro
     restart: unless-stopped
