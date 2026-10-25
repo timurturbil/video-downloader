@@ -1,0 +1,8 @@
+services:
+  video-downloader:
+    build: .
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./cookies:/cookies
+    restart: unless-stopped
