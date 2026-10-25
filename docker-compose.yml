@@ -1,8 +1,13 @@
 services:
   video-downloader:
     build: .
-    ports:
-      - "5050:5050"
     volumes:
       - ./cookies:/cookies:ro
     restart: unless-stopped
+    networks: [default, avr]
+
+networks:
+  # HTTPS için sesli-asistan'daki Caddy'nin ağı (video.{$DOMAIN} -> video-downloader:5050)
+  avr:
+    name: sesli-asistan_avr
+    external: true
